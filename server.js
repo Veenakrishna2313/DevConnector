@@ -5,7 +5,7 @@ const bodyparser = require('body-parser');
 const users=require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
-
+const [assport= require('passport')]
 //Body Parser configuration
 app.use(bodyparser.urlencoded({extended:false}));
 app.use(bodyparser.json());
@@ -29,3 +29,7 @@ mongoose
   .connect(db)
   .then(()=>console.log('MongoDB Connected'))
   .catch(err=>console.log(err));
+
+  //passport configuration
+
+  app.use(passport.initialize());
