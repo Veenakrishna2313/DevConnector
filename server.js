@@ -5,7 +5,7 @@ const bodyparser = require('body-parser');
 const users=require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
-const [assport= require('passport')]
+const passport= require('passport');
 //Body Parser configuration
 app.use(bodyparser.urlencoded({extended:false}));
 app.use(bodyparser.json());
@@ -33,3 +33,5 @@ mongoose
   //passport configuration
 
   app.use(passport.initialize());
+
+  require('./config/passport')(passport);

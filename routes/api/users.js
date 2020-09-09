@@ -3,6 +3,7 @@ const router=express.Router();
 const bcrypt=require('bcryptjs');
 const gravatar= require('gravatar');
 const jwt = require('jsonwebtoken');
+const passport= require('passport');
 const User=require('../../models/User');
 const keys=require('../../config/keys');
 
@@ -87,6 +88,18 @@ bcrypt.compare(password,user.password)
 
   })
     .catch(err => console.log(err));
+})
+
+//@route GET /api/users/current
+//@desc Return current user info
+//@access Private
+
+router.get('/current',
+  passport.authenticate('jwt', {session:false}),
+  (req,res)=>{
+
+   return res.json(req.user);
+
 })
 
 module.exports=router;
