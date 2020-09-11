@@ -4,6 +4,7 @@ const bcrypt=require('bcryptjs');
 const gravatar= require('gravatar');
 const jwt = require('jsonwebtoken');
 const passport= require('passport');
+const validateRegisterInput= require('../../Validation/register');
 const User=require('../../models/User');
 const keys=require('../../config/keys');
 
@@ -12,6 +13,14 @@ const keys=require('../../config/keys');
 //@access Public
 
 router.post('/register', (req,res)=>{
+
+  const {errors,isValid}= validateRegisterInput(req.body);
+
+  if(!isValid){
+    return res.status(400).json(errors);
+  }
+
+
 User.findOne({email:req.body.email})
   .then(user =>{
     if(user){
@@ -46,7 +55,7 @@ User.findOne({email:req.body.email})
 });
 
 
-//@route POST /api/users/register
+//@route POST /api/users/login
 //@desc Tests users js
 //@access Public
 
