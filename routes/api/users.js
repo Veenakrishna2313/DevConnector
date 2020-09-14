@@ -85,7 +85,10 @@ bcrypt.compare(password,user.password)
         jwt.sign(
           payload,
            keys.secretOrKey,
-           {  expiresIn:3600 }, (err,token)=>{return res.json({token:'Bearer '+ token})
+           {  expiresIn:3600 }, 
+           (err,token)=>{
+             
+            return res.json({token:'Bearer '+ token})
         });  
       }
       else{
